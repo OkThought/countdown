@@ -1,5 +1,5 @@
 import React from 'react'
-import {Typography, TextField, Button} from '@material-ui/core'
+import {Typography, TextField, Button, makeStyles, Theme} from '@material-ui/core'
 import {TextFieldProps} from '@material-ui/core/TextField'
 import {formatDate} from '../../utils'
 import {ButtonProps} from '@material-ui/core/Button'
@@ -13,6 +13,22 @@ export interface CountdownFormProps {
   onSubmit: ButtonProps['onClick']
 }
 
+//noinspection TypeScriptValidateTypes
+const useStyles = makeStyles((theme: Theme) => ({
+  title: {
+    padding: theme.spacing(.5),
+  },
+  date: {
+    margin: theme.spacing(.5),
+  },
+  time: {
+    margin: theme.spacing(.5),
+  },
+  submit: {
+    margin: theme.spacing(.5),
+  },
+}))
+
 function CountdownForm(props: CountdownFormProps) {
   const {
     title,
@@ -23,10 +39,13 @@ function CountdownForm(props: CountdownFormProps) {
     onSubmit,
   } = props
 
+  const classes = useStyles(props)
+
   return (
     <>
       <Typography variant='h5' component='div'>
         <TextField
+          className={classes.title}
           variant='outlined'
           value={title}
           onChange={onTitleChange}
@@ -34,6 +53,7 @@ function CountdownForm(props: CountdownFormProps) {
       </Typography>
       <Typography variant='subtitle1' component='div'>
         <TextField
+          className={classes.date}
           variant='outlined'
           InputProps={{
             inputProps: {
@@ -45,6 +65,7 @@ function CountdownForm(props: CountdownFormProps) {
         />
       </Typography>
       <Button
+        className={classes.submit}
         disabled={submitDisabled}
         onClick={onSubmit}
       >

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Implement simple Countdown component">
-      <change afterPath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" afterDir="false" />
+    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Implement countdown form and view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/eslintrc.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/App.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Countdown/Countdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Countdown/Countdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +96,7 @@
       <updated>1572501296838</updated>
       <workItem from="1572501299363" duration="20379000" />
       <workItem from="1572667012533" duration="11334000" />
-      <workItem from="1572800829765" duration="6623000" />
+      <workItem from="1572800829765" duration="7679000" />
     </task>
     <task id="LOCAL-00001" summary="-">
       <created>1572501906317</created>
@@ -114,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572517947999</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implement countdown form and view">
+      <created>1572856046164</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1572856046164</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +141,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Preparation" />
     <MESSAGE value="Implement simple Countdown component" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement simple Countdown component" />
+    <MESSAGE value="Implement countdown form and view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement countdown form and view" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="114" key="#Inspections" timestamp="1572507585419">
@@ -151,30 +157,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="443" y="253" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1572678438001" />
-    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1572502730775">
+    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1572856647166">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1572502730775" />
+    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1572856647166" />
     <state x="567" y="361" key="GitRewordDialog" timestamp="1572501931104">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="567" y="361" key="GitRewordDialog/0.0.1440.900@0.0.1440.900" timestamp="1572501931104" />
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572855550065">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572856024269">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572855550065" />
-    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572855550063">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572856024269" />
+    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572856024266">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572855550063" />
-    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572855550058">
+    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572856024266" />
+    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572856024264">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572855550058" />
-    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572855550064">
+    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572856024264" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572856024267">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572855550064" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572856024267" />
     <state x="308" y="199" key="IDE.errors.dialog" timestamp="1572513069209">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

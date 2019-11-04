@@ -1,12 +1,19 @@
-import {Container} from '@material-ui/core'
+import {Container, makeStyles, Theme} from '@material-ui/core'
 import React, {useState, useEffect, ChangeEvent} from 'react'
-import './App.css'
 import Countdown, {CountdownRenderProps} from '../Countdown/Countdown'
 import {CountdownView} from '../CountdownView/CountdownView'
 import CountdownForm from '../CountdownForm/CountdownForm'
 import {dateWithoutTime} from '../../utils'
 
-function App() {
+//noinspection TypeScriptValidateTypes
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    verticalAlign: 'center',
+    textAlign: 'center',
+  },
+}))
+
+function App(props: {}) {
   const [title, setTitle] = useState('Countdown')
   const [targetDate, setTargetDate] = useState<Date | undefined>(undefined)
   const [newTargetDate, setNewTargetDate] = useState<Date | undefined>(targetDate)
@@ -32,8 +39,10 @@ function App() {
     setTargetDateReached(targetDate === undefined)
   }, [targetDate])
 
+  const classes = useStyles(props)
+
   return (
-    <Container className="App">
+    <Container className={classes.root}>
       {targetDateReached ? (
           <CountdownForm
             title={title}
