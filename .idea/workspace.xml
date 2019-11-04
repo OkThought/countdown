@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Preparation">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsonSchemas.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eslintrc.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Countdown/Countdown.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Countdown/useCountdown.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Countdown/useCountdownUnit.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/react-app-env.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Implement simple Countdown component">
+      <change afterPath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslintrc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/eslintrc.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Countdown/Countdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Countdown/Countdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +51,16 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
+    <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/src/utils.ts" />
+      <recent name="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/CountdownInput" />
       <recent name="$PROJECT_DIR$/src/components/App" />
     </key>
   </component>
@@ -87,6 +79,13 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView />
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -97,7 +96,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572501296838</updated>
-      <workItem from="1572501299363" duration="16168000" />
+      <workItem from="1572501299363" duration="20379000" />
+      <workItem from="1572667012533" duration="11334000" />
+      <workItem from="1572800829765" duration="6623000" />
     </task>
     <task id="LOCAL-00001" summary="-">
       <created>1572501906317</created>
@@ -106,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572501906317</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implement simple Countdown component">
+      <created>1572517947999</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1572517947999</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,7 +125,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -125,7 +135,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Preparation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Preparation" />
+    <MESSAGE value="Implement simple Countdown component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement simple Countdown component" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="114" key="#Inspections" timestamp="1572507585419">
@@ -136,6 +147,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="111" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1572504273789" />
+    <state x="443" y="253" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1572678438001">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="443" y="253" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1572678438001" />
     <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1572502730775">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -144,22 +159,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="567" y="361" key="GitRewordDialog/0.0.1440.900@0.0.1440.900" timestamp="1572501931104" />
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572508096433">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572855550065">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572508096433" />
-    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572508096430">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572855550065" />
+    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572855550063">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572508096430" />
-    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572508096429">
+    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572855550063" />
+    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572855550058">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572508096429" />
-    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572508096432">
+    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572855550058" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572855550064">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572508096432" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572855550064" />
     <state x="308" y="199" key="IDE.errors.dialog" timestamp="1572513069209">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -168,9 +183,17 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="493" y="185" key="RollbackChangesDialog/0.0.1440.900@0.0.1440.900" timestamp="1572501836064" />
-    <state x="182" y="196" key="SettingsEditor" timestamp="1572517580085">
+    <state x="182" y="196" key="SettingsEditor" timestamp="1572522829420">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="182" y="196" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1572517580085" />
+    <state x="182" y="196" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1572522829420" />
+    <state x="482" y="75" key="refactoring.ChangeSignatureDialog" timestamp="1572686179190">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="482" y="75" key="refactoring.ChangeSignatureDialog/0.0.1440.900@0.0.1440.900" timestamp="1572686179190" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1572683819926">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1572683819926" />
   </component>
 </project>
