@@ -34,7 +34,6 @@ function App(props: {}) {
   const [targetDateReached, setTargetDateReached] = useState(targetDate === undefined)
   const links = useMemo<Array<CountdownUrlParams & { label?: string }>>(() => {
     return [{
-      title: 'Countdown',
       label: 'New',
     }, {
       to: new Date(now.getFullYear(), 12, 31, 23, 59, 59, 999),
