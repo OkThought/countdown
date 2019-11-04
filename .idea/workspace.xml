@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Update styles">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Implement app bar with some useful links">
       <change beforePath="$PROJECT_DIR$/src/components/App/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +92,7 @@
       <updated>1572501296838</updated>
       <workItem from="1572501299363" duration="20379000" />
       <workItem from="1572667012533" duration="11334000" />
-      <workItem from="1572800829765" duration="10994000" />
+      <workItem from="1572800829765" duration="11179000" />
     </task>
     <task id="LOCAL-00001" summary="-">
       <created>1572501906317</created>
@@ -125,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572857163086</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Implement app bar with some useful links">
+      <created>1572860710338</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1572860710338</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,7 +153,8 @@
     <MESSAGE value="Implement simple Countdown component" />
     <MESSAGE value="Implement countdown form and view" />
     <MESSAGE value="Update styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update styles" />
+    <MESSAGE value="Implement app bar with some useful links" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement app bar with some useful links" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="114" key="#Inspections" timestamp="1572507585419">
@@ -172,22 +177,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="567" y="361" key="GitRewordDialog/0.0.1440.900@0.0.1440.900" timestamp="1572501931104" />
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572857139487">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572860617736">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572857139487" />
-    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572857139485">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572860617736" />
+    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572860617733">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572857139485" />
-    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572857139484">
+    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572860617733" />
+    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572860617731">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572857139484" />
-    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572857139486">
+    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572860617731" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572860617734">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572857139486" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572860617734" />
     <state x="308" y="199" key="IDE.errors.dialog" timestamp="1572513069209">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

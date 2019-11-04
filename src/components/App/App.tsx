@@ -1,4 +1,4 @@
-import {Container, makeStyles, AppBar, Toolbar, Link, Typography, Theme} from '@material-ui/core'
+import {Container, makeStyles, AppBar, Toolbar, Typography, Theme, Button} from '@material-ui/core'
 import React, {useState, useEffect, ChangeEvent, useMemo} from 'react'
 import Countdown, {CountdownRenderProps} from '../Countdown/Countdown'
 import {CountdownView} from '../CountdownView/CountdownView'
@@ -76,12 +76,12 @@ function App(props: {}) {
         <Toolbar>
           {links.map(({title, label = title, ...restParams}) =>
             <Typography variant='h6' color='initial' key={label}>
-              <Link
+              <Button
                 className={classes.link}
                 href={countdownUrl({title, ...restParams})}
               >
                 {label}
-              </Link>
+              </Button>
             </Typography>,
           )}
         </Toolbar>
