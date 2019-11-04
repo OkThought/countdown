@@ -18,3 +18,17 @@ export function dateWithoutTime(date?: Date) {
 export function pad(num: number, places: number, character = '0') {
   return String(num).padStart(places, character)
 }
+
+export type CountdownUrlParams = {base?: string, to?: Date, title?: string}
+
+export function countdownUrl(params: CountdownUrlParams) {
+  const {
+    base = window.location.pathname,
+    to,
+    title,
+  } = params
+  const toParam = to ? `to=${to.toISOString()}` : ''
+  const titleParam = title ? `title=${title}` : ''
+  const entries = [toParam, titleParam].filter(Boolean)
+  return `${base}?${entries.join('&')}`
+}

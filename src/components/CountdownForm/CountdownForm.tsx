@@ -47,6 +47,7 @@ function CountdownForm(props: CountdownFormProps) {
         <TextField
           className={classes.title}
           variant='outlined'
+          label='Title'
           value={title}
           onChange={onTitleChange}
         />
@@ -55,6 +56,10 @@ function CountdownForm(props: CountdownFormProps) {
         <TextField
           className={classes.date}
           variant='outlined'
+          label='Date'
+          InputLabelProps={{
+            shrink: true,
+          }}
           InputProps={{
             inputProps: {
               type: 'date',
