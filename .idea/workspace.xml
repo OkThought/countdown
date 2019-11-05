@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Credit content authors, including me :D">
+    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Ignore .idea/ finally">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Countdown/Countdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Countdown/Countdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Countdown/useCountdown.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Countdown/useCountdownUnit.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +99,7 @@
       <updated>1572501296838</updated>
       <workItem from="1572501299363" duration="20379000" />
       <workItem from="1572667012533" duration="11334000" />
-      <workItem from="1572800829765" duration="20395000" />
+      <workItem from="1572800829765" duration="29594000" />
     </task>
     <task id="LOCAL-00001" summary="-">
       <created>1572501906317</created>
@@ -180,7 +185,21 @@
       <option name="project" value="LOCAL" />
       <updated>1572934517244</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Credit content authors, including me :D">
+      <created>1572934598226</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1572934598226</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Ignore .idea/ finally">
+      <created>1572934637786</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1572934637786</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +231,8 @@
     <MESSAGE value="Add an icon" />
     <MESSAGE value="Remove comments in index.html" />
     <MESSAGE value="Credit content authors, including me :D" />
-    <option name="LAST_COMMIT_MESSAGE" value="Credit content authors, including me :D" />
+    <MESSAGE value="Ignore .idea/ finally" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ignore .idea/ finally" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="114" key="#Inspections" timestamp="1572507585419">
@@ -235,22 +255,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="567" y="361" key="GitRewordDialog/0.0.1440.900@0.0.1440.900" timestamp="1572501931104" />
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572932389689">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572944828012">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572932389689" />
-    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572932389687">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572944828012" />
+    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572944828010">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572932389687" />
-    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572932389686">
+    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572944828010" />
+    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572944828009">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572932389686" />
-    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572932389688">
+    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572944828009" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572944828011">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572932389688" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572944828011" />
     <state x="308" y="199" key="IDE.errors.dialog" timestamp="1572513069209">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

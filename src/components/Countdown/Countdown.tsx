@@ -1,10 +1,9 @@
 import React, {useEffect, useState, ComponentType, useCallback} from 'react'
-import useCountdown, {TCountdown} from './useCountdown'
 import {CountdownView} from '../CountdownView/CountdownView'
 import {PartialBy} from '../../utils'
 
 export interface CountdownRenderProps {
-  countdown: TCountdown
+  countdown: number
   targetDateReached: boolean
   targetDate: Date | undefined
 }
@@ -22,11 +21,10 @@ function Countdown(props: CountdownProps) {
     updateInterval,
     onTargetDateReachedChange,
     render: Render = CountdownView,
-    ...restProps
   } = props
 
   const [targetDateReached, _setTargetDateReached] = useState(false)
-  const [countdown, setCountdown] = useCountdown({})
+  const [countdown, setCountdown] = useState(0)
 
   const setTargetDateReached = useCallback((value: boolean) => {
     _setTargetDateReached(value)
@@ -41,7 +39,7 @@ function Countdown(props: CountdownProps) {
         if (timeLeft <= 0) {
           setTargetDateReached(true)
         } else {
-          setCountdown({time: timeLeft})
+          setCountdown(timeLeft)
         }
       }, updateInterval)
 
@@ -54,7 +52,6 @@ function Countdown(props: CountdownProps) {
       countdown={countdown}
       targetDate={targetDate}
       targetDateReached={targetDateReached}
-      {...restProps}
     />
   )
 }

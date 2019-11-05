@@ -11,7 +11,7 @@ import {
   formatDate,
   formatTime,
   DAY,
-  parseTime,
+  parseTime, SECOND,
 } from '../../utils'
 
 //noinspection TypeScriptValidateTypes
@@ -156,7 +156,7 @@ function App(props: {}) {
           <div className={classes.view}>
             <Countdown
               targetDate={targetDate}
-              updateInterval={0}
+              updateInterval={SECOND/2}
               onTargetDateReachedChange={setTargetDateReached}
               render={(props: CountdownRenderProps) => (
                 <CountdownView
