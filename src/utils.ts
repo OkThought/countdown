@@ -5,18 +5,34 @@ export const MINUTE = 60 * SECOND
 export const HOUR = 60 * MINUTE
 export const DAY = 24 * HOUR
 
-export function formatDate(date: Date) {
-  console.log('format', date.toISOString().slice(0, 'yyyy-mm-dd'.length))
-  return date.toISOString().slice(0, 'yyyy-mm-dd'.length)
-}
-
 export function dateWithoutTime(date?: Date) {
-  const _date = date || new Date()
-  return new Date(_date.getFullYear(), _date.getMonth(), _date.getDate(), 12)
+  const result = date ? new Date(date) : new Date()
+  result.setHours(12, 0, 0, 0)
+  return result
 }
 
 export function pad(num: number, places: number, character = '0') {
   return String(num).padStart(places, character)
+}
+
+export function formatDate(date: Date) {
+  return [
+    pad(date.getFullYear(), 4),
+    pad(date.getMonth(), 2),
+    pad(date.getDate(), 2),
+  ].join('\u002D')
+}
+
+export function formatTime(date: Date) {
+  return [
+    pad(date.getHours(), 2),
+    pad(date.getMinutes(), 2),
+    pad(date.getSeconds(), 2),
+  ].join(':')
+}
+
+export function parseTime(value: string): [number, number, number] {
+  return value.split(':', 3).map(i => parseInt(i, 10)) as [number, number, number]
 }
 
 export type CountdownUrlParams = {base?: string, to?: Date, title?: string}

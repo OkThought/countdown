@@ -3,7 +3,16 @@ import React, {useState, useEffect, ChangeEvent, useMemo} from 'react'
 import Countdown, {CountdownRenderProps} from '../Countdown/Countdown'
 import {CountdownView} from '../CountdownView/CountdownView'
 import CountdownForm from '../CountdownForm/CountdownForm'
-import {dateWithoutTime, countdownUrl, CountdownUrlParams, MINUTE} from '../../utils'
+import {
+  dateWithoutTime,
+  countdownUrl,
+  CountdownUrlParams,
+  MINUTE,
+  formatDate,
+  formatTime,
+  DAY,
+  parseTime,
+} from '../../utils'
 
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles((theme: Theme) => ({
@@ -14,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   appBar: {},
   link: {
     color: 'inherit',
-    margin: theme.spacing(0.5)
+    margin: theme.spacing(0.5),
   },
   content: {
     textAlign: 'center',
@@ -33,13 +42,15 @@ function App(props: {}) {
   const [newTargetDate, setNewTargetDate] = useState<Date | undefined>(targetDate)
   const [targetDateReached, setTargetDateReached] = useState(targetDate === undefined)
   const links = useMemo<Array<CountdownUrlParams & { label?: string }>>(() => {
+    const tomorrow = new Date(now.getTime() + DAY)
+
     return [{
       label: 'New',
     }, {
-      to: new Date(now.getFullYear(), 12, 31, 23, 59, 59, 999),
+      to: new Date(now.getFullYear() + 1, 1, 1, 0, 0, 0, 0),
       title: 'New Year',
     }, {
-      to: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999),
+      to: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0,0, 0, 0),
       title: 'Midnight',
     }, {
       to: new Date(now.getTime() + 5 * MINUTE),
@@ -48,17 +59,14 @@ function App(props: {}) {
   }, [now])
 
   useEffect(() => {
-    let date = dateWithoutTime()
-
     new URLSearchParams(window.location.search).forEach((value, key) => {
       if (key === 'to') {
-        date = new Date(value)
+        setTargetDate(new Date(value))
       } else if (key === 'title') {
         setTitle(value)
       }
     })
 
-    setTargetDate(date)
   }, [])
 
   const newLocation = newTargetDate && countdownUrl({to: newTargetDate, title})
@@ -88,20 +96,44 @@ function App(props: {}) {
       <Container className={classes.content}>
         {targetDateReached ? (
           <CountdownForm
-            title={title}
-            onTitleChange={({target: {value}}) => setTitle(value)}
-            newTargetDate={newTargetDate}
-            onNewTargetDateChange={(e: ChangeEvent<HTMLInputElement>) => {
-              const oldDate = newTargetDate ? new Date(newTargetDate) : dateWithoutTime()
-              const newDate = e.target.valueAsDate || dateWithoutTime()
-              console.log(e.target.value, e.target.valueAsDate, newDate)
-              oldDate.setFullYear(newDate.getFullYear())
-              oldDate.setMonth(newDate.getMonth())
-              oldDate.setDate(newDate.getDate())
-              setNewTargetDate(oldDate)
+            titleProps={{
+              value: title,
+              onChange: ({target: {value}}) => setTitle(value),
             }}
-            onSubmit={() => window.location.assign(newLocation!)}
-            submitDisabled={!newLocation}
+            dateProps={{
+              value: newTargetDate ? formatDate(newTargetDate) : '',
+              onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                const oldDate = newTargetDate ? new Date(newTargetDate) : dateWithoutTime()
+                const newDate = e.target.valueAsDate
+                if (newDate) {
+                  oldDate.setFullYear(
+                    newDate.getFullYear(),
+                    newDate.getMonth(),
+                    newDate.getDate(),
+                  )
+                  setNewTargetDate(oldDate)
+                } else {
+                  setNewTargetDate(undefined)
+                }
+              },
+            }}
+            timeProps={{
+              value: newTargetDate ? formatTime(newTargetDate) : '',
+              onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                const oldDate = newTargetDate ? new Date(newTargetDate) : new Date()
+                const {value} = e.target
+                if (value) {
+                  oldDate.setHours(...parseTime(e.target.value))
+                  setNewTargetDate(oldDate)
+                } else {
+                  setNewTargetDate(newTargetDate ? dateWithoutTime(newTargetDate) : undefined)
+                }
+              },
+            }}
+            submitProps={{
+              disabled: !newLocation,
+              href: newLocation!,
+            }}
           />
         ) : (
           <Countdown

@@ -1,16 +1,13 @@
 import React from 'react'
 import {Typography, TextField, Button, makeStyles, Theme} from '@material-ui/core'
-import {TextFieldProps} from '@material-ui/core/TextField'
-import {formatDate} from '../../utils'
+import {OutlinedTextFieldProps} from '@material-ui/core/TextField'
 import {ButtonProps} from '@material-ui/core/Button'
 
 export interface CountdownFormProps {
-  title: string
-  onTitleChange: TextFieldProps['onChange']
-  newTargetDate: Date | undefined
-  onNewTargetDateChange: TextFieldProps['onChange']
-  submitDisabled?: boolean
-  onSubmit: ButtonProps['onClick']
+  titleProps: Partial<OutlinedTextFieldProps>
+  dateProps: Partial<OutlinedTextFieldProps>
+  timeProps: Partial<OutlinedTextFieldProps>
+  submitProps: ButtonProps
 }
 
 //noinspection TypeScriptValidateTypes
@@ -31,12 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function CountdownForm(props: CountdownFormProps) {
   const {
-    title,
-    onTitleChange,
-    newTargetDate,
-    onNewTargetDateChange,
-    submitDisabled,
-    onSubmit,
+    titleProps,
+    dateProps,
+    timeProps,
+    submitProps,
   } = props
 
   const classes = useStyles(props)
@@ -45,34 +40,53 @@ function CountdownForm(props: CountdownFormProps) {
     <>
       <Typography variant='h5' component='div'>
         <TextField
-          className={classes.title}
-          variant='outlined'
-          label='Title'
-          value={title}
-          onChange={onTitleChange}
+          {...{
+            className: classes.title,
+            variant: 'outlined',
+            label: 'Title',
+            ...titleProps,
+          }}
         />
       </Typography>
       <Typography variant='subtitle1' component='div'>
         <TextField
-          className={classes.date}
-          variant='outlined'
-          label='Date'
-          InputLabelProps={{
-            shrink: true,
-          }}
-          InputProps={{
-            inputProps: {
-              type: 'date',
+          {...{
+            className: classes.date,
+            variant: 'outlined',
+            label: 'Date',
+            InputLabelProps: {
+              shrink: true,
             },
+            InputProps: {
+              inputProps: {
+                type: 'date',
+              },
+            },
+            ...dateProps,
           }}
-          onChange={onNewTargetDateChange}
-          value={newTargetDate ? formatDate(newTargetDate) : ''}
+        />
+        <TextField
+          {...{
+            className: classes.time,
+            variant: 'outlined',
+            label: 'Time',
+            InputLabelProps: {
+              shrink: true,
+            },
+            InputProps: {
+              inputProps: {
+                type: 'time',
+              },
+            },
+            ...timeProps,
+          }}
         />
       </Typography>
       <Button
-        className={classes.submit}
-        disabled={submitDisabled}
-        onClick={onSubmit}
+        {...{
+          className: classes.submit,
+          ...submitProps,
+        }}
       >
         Start
       </Button>

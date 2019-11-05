@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Replace app bar links with buttons">
+    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Fix link 'New': remove title">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +95,7 @@
       <updated>1572501296838</updated>
       <workItem from="1572501299363" duration="20379000" />
       <workItem from="1572667012533" duration="11334000" />
-      <workItem from="1572800829765" duration="11309000" />
+      <workItem from="1572800829765" duration="17043000" />
     </task>
     <task id="LOCAL-00001" summary="-">
       <created>1572501906317</created>
@@ -136,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572860871552</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fix link 'New': remove title">
+      <created>1572861002347</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1572861002347</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,7 +172,8 @@
     <MESSAGE value="Update styles" />
     <MESSAGE value="Implement app bar with some useful links" />
     <MESSAGE value="Replace app bar links with buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Replace app bar links with buttons" />
+    <MESSAGE value="Fix link 'New': remove title" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix link 'New': remove title" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="114" key="#Inspections" timestamp="1572507585419">
