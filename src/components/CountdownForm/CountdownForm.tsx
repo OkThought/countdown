@@ -1,5 +1,5 @@
 import React from 'react'
-import {Typography, TextField, Button, makeStyles, Theme} from '@material-ui/core'
+import {TextField, Button, makeStyles, Theme} from '@material-ui/core'
 import {OutlinedTextFieldProps} from '@material-ui/core/TextField'
 import {ButtonProps} from '@material-ui/core/Button'
 
@@ -13,13 +13,21 @@ export interface CountdownFormProps {
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    padding: theme.spacing(.5),
+    margin: theme.spacing(.5),
+  },
+  datetimeContainer: {
+    display: 'flex',
+    alignItems: 'stretch',
+    alignContent: 'stretch',
+    flexWrap: 'wrap',
   },
   date: {
     margin: theme.spacing(.5),
+    flexGrow: 1,
   },
   time: {
     margin: theme.spacing(.5),
+    flexGrow: 1,
   },
   submit: {
     margin: theme.spacing(.5),
@@ -38,17 +46,15 @@ function CountdownForm(props: CountdownFormProps) {
 
   return (
     <>
-      <Typography variant='h5' component='div'>
-        <TextField
-          {...{
-            className: classes.title,
-            variant: 'outlined',
-            label: 'Title',
-            ...titleProps,
-          }}
-        />
-      </Typography>
-      <Typography variant='subtitle1' component='div'>
+      <TextField
+        {...{
+          className: classes.title,
+          variant: 'outlined',
+          label: 'Title',
+          ...titleProps,
+        }}
+      />
+      <div className={classes.datetimeContainer}>
         <TextField
           {...{
             className: classes.date,
@@ -81,7 +87,7 @@ function CountdownForm(props: CountdownFormProps) {
             ...timeProps,
           }}
         />
-      </Typography>
+      </div>
       <Button
         {...{
           className: classes.submit,

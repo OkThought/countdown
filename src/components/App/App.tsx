@@ -18,6 +18,7 @@ import {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
     minHeight: '100vh',
   },
   appBar: {},
@@ -26,11 +27,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(0.5),
   },
   content: {
-    textAlign: 'center',
     flexGrow: 1,
     display: 'flex',
-    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
+  form: {
+    display: 'flex',
     flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+  },
+  view: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
 }))
@@ -50,7 +61,7 @@ function App(props: {}) {
       to: new Date(now.getFullYear() + 1, 1, 1, 0, 0, 0, 0),
       title: 'New Year',
     }, {
-      to: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0,0, 0, 0),
+      to: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0, 0),
       title: 'Midnight',
     }, {
       to: new Date(now.getTime() + 5 * MINUTE),
@@ -79,7 +90,7 @@ function App(props: {}) {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}>
+      <AppBar className={classes.appBar} position='sticky'>
         <Toolbar>
           {links.map(({title, label = title, ...restParams}) =>
             <Typography variant='h6' color='initial' key={label}>
@@ -95,58 +106,62 @@ function App(props: {}) {
       </AppBar>
       <Container className={classes.content}>
         {targetDateReached ? (
-          <CountdownForm
-            titleProps={{
-              value: title,
-              onChange: ({target: {value}}) => setTitle(value),
-            }}
-            dateProps={{
-              value: newTargetDate ? formatDate(newTargetDate) : '',
-              onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                const oldDate = newTargetDate ? new Date(newTargetDate) : dateWithoutTime()
-                const newDate = e.target.valueAsDate
-                if (newDate) {
-                  oldDate.setFullYear(
-                    newDate.getFullYear(),
-                    newDate.getMonth(),
-                    newDate.getDate(),
-                  )
-                  setNewTargetDate(oldDate)
-                } else {
-                  setNewTargetDate(undefined)
-                }
-              },
-            }}
-            timeProps={{
-              value: newTargetDate ? formatTime(newTargetDate) : '',
-              onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                const oldDate = newTargetDate ? new Date(newTargetDate) : new Date()
-                const {value} = e.target
-                if (value) {
-                  oldDate.setHours(...parseTime(e.target.value))
-                  setNewTargetDate(oldDate)
-                } else {
-                  setNewTargetDate(newTargetDate ? dateWithoutTime(newTargetDate) : undefined)
-                }
-              },
-            }}
-            submitProps={{
-              disabled: !newLocation,
-              href: newLocation!,
-            }}
-          />
+          <div className={classes.form}>
+            <CountdownForm
+              titleProps={{
+                value: title,
+                onChange: ({target: {value}}) => setTitle(value),
+              }}
+              dateProps={{
+                value: newTargetDate ? formatDate(newTargetDate) : '',
+                onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                  const oldDate = newTargetDate ? new Date(newTargetDate) : dateWithoutTime()
+                  const newDate = e.target.valueAsDate
+                  if (newDate) {
+                    oldDate.setFullYear(
+                      newDate.getFullYear(),
+                      newDate.getMonth(),
+                      newDate.getDate(),
+                    )
+                    setNewTargetDate(oldDate)
+                  } else {
+                    setNewTargetDate(undefined)
+                  }
+                },
+              }}
+              timeProps={{
+                value: newTargetDate ? formatTime(newTargetDate) : '',
+                onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                  const oldDate = newTargetDate ? new Date(newTargetDate) : new Date()
+                  const {value} = e.target
+                  if (value) {
+                    oldDate.setHours(...parseTime(e.target.value))
+                    setNewTargetDate(oldDate)
+                  } else {
+                    setNewTargetDate(newTargetDate ? dateWithoutTime(newTargetDate) : undefined)
+                  }
+                },
+              }}
+              submitProps={{
+                disabled: !newLocation,
+                href: newLocation!,
+              }}
+            />
+          </div>
         ) : (
-          <Countdown
-            targetDate={targetDate}
-            updateInterval={0}
-            onTargetDateReachedChange={setTargetDateReached}
-            render={(props: CountdownRenderProps) => (
-              <CountdownView
-                {...props}
-                title={title}
-              />
-            )}
-          />
+          <div className={classes.view}>
+            <Countdown
+              targetDate={targetDate}
+              updateInterval={0}
+              onTargetDateReachedChange={setTargetDateReached}
+              render={(props: CountdownRenderProps) => (
+                <CountdownView
+                  {...props}
+                  title={title}
+                />
+              )}
+            />
+          </div>
         )
         }
       </Container>
