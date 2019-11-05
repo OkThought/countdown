@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "node"
+
+cache:
+  directories:
+    - $HOME/.npm
+  yarn: true
+
+before_deploy:
+  - yarn run build
+
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    local-dir: build/
+    github-token: $GITHUB_TOKEN
+    on:
+      branch: master
