@@ -1,4 +1,4 @@
-import {Container, makeStyles, AppBar, Toolbar, Typography, Theme, Button} from '@material-ui/core'
+import {Container, makeStyles, AppBar, Toolbar, Typography, Theme, Button, Link} from '@material-ui/core'
 import React, {useState, useEffect, ChangeEvent, useMemo} from 'react'
 import Countdown, {CountdownRenderProps} from '../Countdown/Countdown'
 import {CountdownView} from '../CountdownView/CountdownView'
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     display: 'flex',
     justifyContent: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   form: {
     display: 'flex',
@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'stretch',
     justifyContent: 'center',
+  },
+  footer: {
+    textAlign: 'center',
   },
 }))
 
@@ -135,6 +138,7 @@ function App(props: {}) {
                   const oldDate = newTargetDate ? new Date(newTargetDate) : new Date()
                   const {value} = e.target
                   if (value) {
+                    //noinspection TypeScriptValidateTypes
                     oldDate.setHours(...parseTime(e.target.value))
                     setNewTargetDate(oldDate)
                   } else {
@@ -164,6 +168,18 @@ function App(props: {}) {
           </div>
         )
         }
+      </Container>
+      <Container className={classes.footer}>
+        <Typography color='textSecondary' variant='caption' component='div'>
+          {'Made with ❤️ by '}
+          <Link color='textSecondary' href='https://github.com/OkThought'>Ivan</Link>
+        </Typography>
+        <Typography color='textSecondary' variant='caption' component='div'>
+          {'Icons made by '}
+          <Link color='textSecondary' href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</Link>
+          {' from '}
+          <Link color='textSecondary' href="https://www.flaticon.com/" title="Flaticon">flaticon.com</Link>
+        </Typography>
       </Container>
     </div>
   )
