@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Implement time input">
+    <list default="true" id="1f494eaa-4240-4eb8-b143-38bbd2dfee88" name="Default Changelist" comment="Fix styles">
+      <change afterPath="$PROJECT_DIR$/public/countdown256.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/countdown32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/countdown512.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CountdownForm/CountdownForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +62,7 @@
       <recent name="$PROJECT_DIR$/src/components/CountdownView/CountdownView.tsx" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/src/components/CountdownInput" />
       <recent name="$PROJECT_DIR$/src/components/App" />
     </key>
@@ -94,7 +101,7 @@
       <updated>1572501296838</updated>
       <workItem from="1572501299363" duration="20379000" />
       <workItem from="1572667012533" duration="11334000" />
-      <workItem from="1572800829765" duration="18316000" />
+      <workItem from="1572800829765" duration="19100000" />
     </task>
     <task id="LOCAL-00001" summary="-">
       <created>1572501906317</created>
@@ -152,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572930690723</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fix styles">
+      <created>1572932402659</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1572932402659</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +194,8 @@
     <MESSAGE value="Replace app bar links with buttons" />
     <MESSAGE value="Fix link 'New': remove title" />
     <MESSAGE value="Implement time input" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement time input" />
+    <MESSAGE value="Fix styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix styles" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="114" key="#Inspections" timestamp="1572507585419">
@@ -195,30 +210,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="443" y="253" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1572678438001" />
-    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1572856647166">
+    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1572933145511">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1572856647166" />
+    <state x="458" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1572933145511" />
     <state x="567" y="361" key="GitRewordDialog" timestamp="1572501931104">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="567" y="361" key="GitRewordDialog/0.0.1440.900@0.0.1440.900" timestamp="1572501931104" />
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572930643835">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom" timestamp="1572932389689">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572930643835" />
-    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572930643832">
+    <state width="1419" height="272" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572932389689" />
+    <state width="1419" height="272" key="GridCell.Tab.0.center" timestamp="1572932389687">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572930643832" />
-    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572930643830">
+    <state width="1419" height="272" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572932389687" />
+    <state width="1419" height="272" key="GridCell.Tab.0.left" timestamp="1572932389686">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572930643830" />
-    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572930643833">
+    <state width="1419" height="272" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572932389686" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right" timestamp="1572932389688">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572930643833" />
+    <state width="1419" height="272" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572932389688" />
     <state x="308" y="199" key="IDE.errors.dialog" timestamp="1572513069209">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -231,6 +246,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="182" y="196" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1572522829420" />
+    <state x="526" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1572932677217">
+      <screen x="0" y="23" width="1440" height="829" />
+    </state>
+    <state x="526" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.829@0.23.1440.829" timestamp="1572932677217" />
     <state x="482" y="75" key="refactoring.ChangeSignatureDialog" timestamp="1572686179190">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
