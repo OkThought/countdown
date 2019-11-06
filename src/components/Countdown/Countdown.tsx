@@ -1,38 +1,42 @@
-import React, {useEffect, useState, ComponentType, useCallback} from 'react'
+import React, {useEffect, useState} from 'react'
 import {CountdownView} from '../CountdownView/CountdownView'
-import {PartialBy} from '../../utils'
+import {SECOND} from '../../utils'
+import {useLocation} from 'react-router-dom'
 
-export interface CountdownRenderProps {
-  countdown: number
-  targetDateReached: boolean
-  targetDate: Date | undefined
-}
-
-export interface CountdownProps extends PartialBy<CountdownRenderProps, 'countdown' | 'targetDateReached'> {
-  targetDate: Date | undefined
-  updateInterval: number
-  onTargetDateReachedChange?: (value: boolean) => void
-  render?: ComponentType<CountdownRenderProps>
+export interface CountdownProps {
+  targetDate?: Date
+  updateInterval?: number
 }
 
 function Countdown(props: CountdownProps) {
   const {
-    targetDate,
-    updateInterval,
-    onTargetDateReachedChange,
-    render: Render = CountdownView,
+    targetDate: controlledTargetDate,
+    updateInterval = SECOND / 2,
   } = props
 
-  const [targetDateReached, _setTargetDateReached] = useState(false)
+  const location = useLocation()
+
+  const [targetDate, setTargetDate] = useState(controlledTargetDate)
+  const [title, setTitle] = useState('')
+  const [targetDateReached, setTargetDateReached] = useState(false)
   const [countdown, setCountdown] = useState(0)
 
-  const setTargetDateReached = useCallback((value: boolean) => {
-    _setTargetDateReached(value)
-    onTargetDateReachedChange && onTargetDateReachedChange(value)
-  }, [onTargetDateReachedChange])
+  const isTargetDateControlled = controlledTargetDate !== undefined
 
   useEffect(() => {
-    if (targetDate) {
+    if (!isTargetDateControlled) {
+      new URLSearchParams(location.search).forEach((value, key) => {
+        if (key === 'to') {
+          setTargetDate(new Date(value))
+        } else if (key === 'title') {
+          setTitle(value)
+        }
+      })
+    }
+  }, [isTargetDateControlled, location.search])
+
+  useEffect(() => {
+    if (targetDate && !targetDateReached) {
       const handle = setInterval(() => {
         const now = new Date()
         const timeLeft = targetDate.getTime() - now.getTime()
@@ -45,10 +49,11 @@ function Countdown(props: CountdownProps) {
 
       return () => clearInterval(handle)
     }
-  }, [setTargetDateReached, setCountdown, targetDate, updateInterval])
+  }, [setTargetDateReached, setCountdown, targetDate, updateInterval, targetDateReached])
 
   return (
-    <Render
+    <CountdownView
+      title={title}
       countdown={countdown}
       targetDate={targetDate}
       targetDateReached={targetDateReached}

@@ -10,7 +10,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core'
-import {CountdownRenderProps} from '../Countdown/Countdown'
 import {SECOND, MINUTE, HOUR, DAY} from '../../utils'
 import {GridListTileProps} from '@material-ui/core/GridListTile'
 
@@ -22,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
@@ -49,7 +49,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-export interface CountdownViewProps extends CountdownRenderProps {
+export interface CountdownViewProps {
+  countdown: number
+  targetDateReached: boolean
+  targetDate: Date | undefined
   title?: string
   includeMilliseconds?: boolean
 }
@@ -91,7 +94,7 @@ export function CountdownView(props: CountdownViewProps) {
     units.push({key: 'milliseconds', title: 'milliseconds', value: milliseconds, cols: maxCols === 5 ? 1 : maxCols === 3 ? 2 : maxCols})
   }
 
-  const cols = Math.min(maxCols, units.length)
+  const cols = maxCols === 3 ? 2 : Math.min(maxCols, units.length)
 
   return (
     <div className={classes.root}>

@@ -43,16 +43,21 @@ export function parseHMS(value: string): [number, number, number] {
   return value.split(TIME_DELIMITER, 3).map(i => parseInt(i, 10)) as [number, number, number]
 }
 
-export type CountdownUrlParams = {base?: string, to?: Date, title?: string}
+export type CountdownUrlParams = {
+  to?: Date | number | string
+  title?: string
+}
 
 export function countdownUrl(params: CountdownUrlParams) {
   const {
-    base = window.location.pathname,
     to,
     title,
   } = params
-  const toParam = to ? `to=${to.toISOString()}` : ''
+  const toDate = to ? to instanceof Date ? to : new Date(to) : undefined
   const titleParam = title ? `title=${title}` : ''
-  const entries = [toParam, titleParam].filter(Boolean)
-  return `${base}?${entries.join('&')}`
+  const entries = [
+    toDate ? `to=${toDate.toISOString()}` : '',
+    titleParam,
+  ].filter(Boolean)
+  return `/?${entries.join('&')}`
 }

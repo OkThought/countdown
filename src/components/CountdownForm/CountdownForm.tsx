@@ -12,6 +12,12 @@ export interface CountdownFormProps {
 
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+  },
   title: {
     margin: theme.spacing(.5),
   },
@@ -45,7 +51,7 @@ function CountdownForm(props: CountdownFormProps) {
   const classes = useStyles(props)
 
   return (
-    <>
+    <div className={classes.root}>
       <TextField
         {...{
           className: classes.title,
@@ -96,7 +102,7 @@ function CountdownForm(props: CountdownFormProps) {
       >
         Start
       </Button>
-    </>
+    </div>
   )
 }
 
