@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "target": "es5",
+    "target": "es2016",
     "lib": [
       "dom",
       "dom.iterable",
