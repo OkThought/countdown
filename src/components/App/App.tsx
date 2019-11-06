@@ -1,5 +1,5 @@
 import {makeStyles} from '@material-ui/core'
-import React from 'react'
+import React, {useEffect} from 'react'
 import Footer from '../Footer/Footer'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import CountdownCreate from '../CountdownCreate/CountdownCreate'
@@ -23,6 +23,10 @@ const useStyles = makeStyles({
 
 function App(props: {}) {
   const classes = useStyles(props)
+
+  useEffect(() => {
+    window.document.title = 'Countdown'
+  })
 
   return (
     <div className={classes.root}>

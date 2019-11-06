@@ -51,6 +51,10 @@ function Countdown(props: CountdownProps) {
     }
   }, [setTargetDateReached, setCountdown, targetDate, updateInterval, targetDateReached])
 
+  useEffect(() => {
+    window.document.title = title || 'Countdown'
+  }, [title])
+
   return (
     <CountdownView
       title={title}

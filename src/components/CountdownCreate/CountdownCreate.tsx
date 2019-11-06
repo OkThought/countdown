@@ -35,6 +35,10 @@ function CountdownCreate(props: CountdownCreateProps) {
   }, [datetimeValue, title])
 
   useEffect(() => {
+    window.document.title = title || 'New Countdown'
+  }, [title])
+
+  useEffect(() => {
     new URLSearchParams(location.search).forEach((value, key) => {
       if (key === 'date') {
         setDateInputString(value)
