@@ -54,7 +54,7 @@ function App(props: {}) {
     return [{
       label: 'New',
     }, {
-      to: new Date(now.getFullYear() + 1, 1, 1, 0, 0, 0, 0),
+      to: new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0),
       title: 'New Year',
     }, {
       to: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0, 0),
