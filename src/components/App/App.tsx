@@ -3,16 +3,7 @@ import React, {useState, useEffect, ChangeEvent, useMemo} from 'react'
 import Countdown, {CountdownRenderProps} from '../Countdown/Countdown'
 import {CountdownView} from '../CountdownView/CountdownView'
 import CountdownForm from '../CountdownForm/CountdownForm'
-import {
-  dateWithoutTime,
-  countdownUrl,
-  CountdownUrlParams,
-  MINUTE,
-  formatDate,
-  formatTime,
-  DAY,
-  parseTime, SECOND,
-} from '../../utils'
+import {countdownUrl, CountdownUrlParams, MINUTE, DAY, parseHMS, SECOND, parseYMD} from '../../utils'
 
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,6 +44,8 @@ function App(props: {}) {
   const now = new Date()
   const [title, setTitle] = useState('')
   const [targetDate, setTargetDate] = useState<Date | undefined>(undefined)
+  const [dateInputString, setDateInputString] = useState('')
+  const [timeInputString, setTimeInputString] = useState('')
   const [newTargetDate, setNewTargetDate] = useState<Date | undefined>(targetDate)
   const [targetDateReached, setTargetDateReached] = useState(targetDate === undefined)
   const links = useMemo<Array<CountdownUrlParams & { label?: string }>>(() => {
@@ -80,8 +73,31 @@ function App(props: {}) {
         setTitle(value)
       }
     })
-
   }, [])
+
+  useEffect(() => {
+    let date: Date | undefined = undefined
+    if (dateInputString) {
+      const [year, month, dayOfTheMonth] = parseYMD(dateInputString)
+      date = new Date(year, month - 1, dayOfTheMonth)
+    }
+    setNewTargetDate(date)
+  }, [dateInputString])
+
+  const newTargetDateTimeValue = newTargetDate && newTargetDate.getTime()
+
+  useEffect(() => {
+    if (newTargetDateTimeValue) {
+      const date = new Date(newTargetDateTimeValue)
+      if (timeInputString) {
+        const [hours, minutes, seconds = 0] = parseHMS(timeInputString)
+        date.setHours(hours, minutes, seconds)
+      } else {
+        date.setHours(0)
+      }
+      setNewTargetDate(date)
+    }
+  }, [newTargetDateTimeValue, timeInputString])
 
   const newLocation = newTargetDate && countdownUrl({to: newTargetDate, title})
 
@@ -116,35 +132,12 @@ function App(props: {}) {
                 onChange: ({target: {value}}) => setTitle(value),
               }}
               dateProps={{
-                value: newTargetDate ? formatDate(newTargetDate) : '',
-                onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                  const oldDate = newTargetDate ? new Date(newTargetDate) : dateWithoutTime()
-                  const newDate = e.target.valueAsDate
-                  if (newDate) {
-                    oldDate.setFullYear(
-                      newDate.getFullYear(),
-                      newDate.getMonth(),
-                      newDate.getDate(),
-                    )
-                    setNewTargetDate(oldDate)
-                  } else {
-                    setNewTargetDate(undefined)
-                  }
-                },
+                value: dateInputString,
+                onChange: (e: ChangeEvent<HTMLInputElement>) => setDateInputString(e.target.value),
               }}
               timeProps={{
-                value: newTargetDate ? formatTime(newTargetDate) : '',
-                onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                  const oldDate = newTargetDate ? new Date(newTargetDate) : new Date()
-                  const {value} = e.target
-                  if (value) {
-                    //noinspection TypeScriptValidateTypes
-                    oldDate.setHours(...parseTime(e.target.value))
-                    setNewTargetDate(oldDate)
-                  } else {
-                    setNewTargetDate(newTargetDate ? dateWithoutTime(newTargetDate) : undefined)
-                  }
-                },
+                value: timeInputString,
+                onChange: (e: ChangeEvent<HTMLInputElement>) => setTimeInputString(e.target.value),
               }}
               submitProps={{
                 disabled: !newLocation,
@@ -156,7 +149,7 @@ function App(props: {}) {
           <div className={classes.view}>
             <Countdown
               targetDate={targetDate}
-              updateInterval={SECOND/2}
+              updateInterval={SECOND / 2}
               onTargetDateReachedChange={setTargetDateReached}
               render={(props: CountdownRenderProps) => (
                 <CountdownView

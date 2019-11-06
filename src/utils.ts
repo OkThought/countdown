@@ -15,24 +15,32 @@ export function pad(num: number, places: number, character = '0') {
   return String(num).padStart(places, character)
 }
 
+export const DATE_DELIMITER = '\u002D'
+
 export function formatDate(date: Date) {
   return [
     pad(date.getFullYear(), 4),
     pad(date.getMonth(), 2),
     pad(date.getDate(), 2),
-  ].join('\u002D')
+  ].join(DATE_DELIMITER)
 }
+
+export const TIME_DELIMITER = '\u003A'
 
 export function formatTime(date: Date) {
   return [
     pad(date.getHours(), 2),
     pad(date.getMinutes(), 2),
     pad(date.getSeconds(), 2),
-  ].join(':')
+  ].join(TIME_DELIMITER)
 }
 
-export function parseTime(value: string): [number, number, number] {
-  return value.split(':', 3).map(i => parseInt(i, 10)) as [number, number, number]
+export function parseYMD(value: string): [number, number, number] {
+  return value.split(DATE_DELIMITER, 3).map(i => parseInt(i, 10)) as [number, number, number]
+}
+
+export function parseHMS(value: string): [number, number, number] {
+  return value.split(TIME_DELIMITER, 3).map(i => parseInt(i, 10)) as [number, number, number]
 }
 
 export type CountdownUrlParams = {base?: string, to?: Date, title?: string}
