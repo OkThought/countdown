@@ -59,5 +59,5 @@ export function countdownUrl(params: CountdownUrlParams) {
     toDate ? `to=${toDate.toISOString()}` : '',
     titleParam,
   ].filter(Boolean)
-  return `/?${entries.join('&')}`
+  return `${process.env.PUBLIC_URL}/?${entries.join('&')}`
 }

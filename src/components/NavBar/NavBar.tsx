@@ -31,7 +31,7 @@ function NavBar(props: NavBarProps) {
   
   const links = useMemo<Link[]>(() => [{
     label: 'New',
-    getUrl: () => '/new',
+    getUrl: () => `${process.env.PUBLIC_URL}/new`,
   }, {
     label: 'New Year',
     getUrl: () => countdownUrl({
