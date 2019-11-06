@@ -44,11 +44,11 @@ export function parseHMS(value: string): [number, number, number] {
 }
 
 export type CountdownUrlParams = {
-  to?: Date | number | string
+  to: Date | number | string
   title?: string
 }
 
-export function countdownUrl(params: CountdownUrlParams) {
+export function countdownPath(params: CountdownUrlParams) {
   const {
     to,
     title,
@@ -59,5 +59,5 @@ export function countdownUrl(params: CountdownUrlParams) {
     toDate ? `to=${toDate.toISOString()}` : '',
     titleParam,
   ].filter(Boolean)
-  return `${process.env.PUBLIC_URL}/?${entries.join('&')}`
+  return `?${entries.join('&')}`
 }

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react'
-import {parseYMD, parseHMS, countdownUrl} from '../../utils'
+import {parseYMD, parseHMS, countdownPath} from '../../utils'
 import CountdownForm, {CountdownFormProps} from '../CountdownForm/CountdownForm'
 import {useLocation, useHistory} from 'react-router-dom'
 
@@ -31,7 +31,7 @@ function CountdownCreate(props: CountdownCreateProps) {
   }, [history, location])
 
   const newLocation = useMemo(() => {
-    return datetimeValue === undefined ? undefined : countdownUrl({to: datetimeValue, title})
+    return datetimeValue === undefined ? undefined : countdownPath({to: datetimeValue, title})
   }, [datetimeValue, title])
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 import React, {useMemo} from 'react'
-import {Toolbar, Typography, Button, AppBar, makeStyles, Theme} from '@material-ui/core'
-import {countdownUrl, MINUTE} from '../../utils'
+import {Toolbar, Typography, AppBar, makeStyles, Theme, Button} from '@material-ui/core'
+import {countdownPath, MINUTE} from '../../utils'
 import {AppBarProps} from '@material-ui/core/AppBar'
-import {useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles((theme: Theme) => ({
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-type Link = { 
+type NavItem = {
   label: string
   getUrl: () => string
 }
@@ -27,14 +27,12 @@ function NavBar(props: NavBarProps) {
     ...restProps
   } = props
 
-  const history = useHistory()
-  
-  const links = useMemo<Link[]>(() => [{
+  const links = useMemo<NavItem[]>(() => [{
     label: 'New',
-    getUrl: () => `${process.env.PUBLIC_URL}/new`,
+    getUrl: () => '/new',
   }, {
     label: 'New Year',
-    getUrl: () => countdownUrl({
+    getUrl: () => countdownPath({
       to: new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0, 0),
       title: 'New Year 🎄',
     }),
@@ -43,14 +41,14 @@ function NavBar(props: NavBarProps) {
     getUrl: () => {
       const tomorrow = new Date()
       tomorrow.setDate(tomorrow.getDate() + 1)
-      return countdownUrl({
+      return countdownPath({
         to: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0, 0),
         title: 'Midnight 🌃',
       })
     },
   }, {
     label: '5 minutes',
-    getUrl: () => countdownUrl({
+    getUrl: () => countdownPath({
       to: new Date(new Date().getTime() + 5 * MINUTE),
       title: '5 minutes',
     }),
@@ -65,7 +63,8 @@ function NavBar(props: NavBarProps) {
           <Typography variant='h6' color='initial' key={label}>
             <Button
               className={classes.link}
-              onClick={() => history.push(getUrl())}
+              component={Link}
+              to={getUrl}
             >
               {label}
             </Button>
