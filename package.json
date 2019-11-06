@@ -1,6 +1,7 @@
 {
   "name": "countdown",
   "version": "0.0.0",
+  "homepage": "https://okthought.github.io/countdown",
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "@types/react-dom": "^16.9.3",
