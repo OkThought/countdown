@@ -26,7 +26,7 @@ function App(props: {}) {
 
   return (
     <div className={classes.root}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <NavBar/>
         <div className={classes.content}>
           <Switch>
