@@ -16,9 +16,9 @@ function Countdown(props: CountdownProps) {
 
   const location = useLocation()
 
-  const [targetDate, setTargetDate] = useState(controlledTargetDate)
   const [title, setTitle] = useState('')
-  const [targetDateReached, setTargetDateReached] = useState(false)
+  const [finishTime, setFinishTime] = useState(0)
+  const [finished, setFinished] = useState(false)
   const [countdown, setCountdown] = useState(0)
 
   const isTargetDateControlled = controlledTargetDate !== undefined
@@ -27,7 +27,12 @@ function Countdown(props: CountdownProps) {
     if (!isTargetDateControlled) {
       new URLSearchParams(location.search).forEach((value, key) => {
         if (key === 'to') {
-          setTargetDate(new Date(value))
+          setFinishTime(new Date(value).getTime())
+        } else if (key === 'from') {
+          const milliseconds = parseInt(value, 10)
+          if (!isNaN(milliseconds)) {
+            setFinishTime(Date.now() + milliseconds)
+          }
         } else if (key === 'title') {
           setTitle(value)
         }
@@ -36,20 +41,18 @@ function Countdown(props: CountdownProps) {
   }, [isTargetDateControlled, location.search])
 
   useEffect(() => {
-    if (targetDate && !targetDateReached) {
+    if (!finished) {
       const handle = setInterval(() => {
-        const now = new Date()
-        const timeLeft = targetDate.getTime() - now.getTime()
-        if (timeLeft <= 0) {
-          setTargetDateReached(true)
+        const millisecondsLeft = finishTime - Date.now()
+        if (millisecondsLeft <= 0) {
+          setFinished(true)
         } else {
-          setCountdown(timeLeft)
+          setCountdown(millisecondsLeft)
         }
       }, updateInterval)
-
       return () => clearInterval(handle)
     }
-  }, [setTargetDateReached, setCountdown, targetDate, updateInterval, targetDateReached])
+  }, [setCountdown, updateInterval, finished, finishTime])
 
   useEffect(() => {
     window.document.title = title || 'Countdown'
@@ -59,8 +62,6 @@ function Countdown(props: CountdownProps) {
     <CountdownView
       title={title}
       countdown={countdown}
-      targetDate={targetDate}
-      targetDateReached={targetDateReached}
     />
   )
 }

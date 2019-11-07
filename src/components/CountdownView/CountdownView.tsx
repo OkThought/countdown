@@ -51,8 +51,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface CountdownViewProps {
   countdown: number
-  targetDateReached: boolean
-  targetDate: Date | undefined
   title?: string
   includeMilliseconds?: boolean
 }
