@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useMemo} from 'react'
 import {CountdownView} from '../CountdownView/CountdownView'
 import {SECOND} from '../../utils'
 import {useLocation} from 'react-router-dom'
@@ -8,10 +8,14 @@ export interface CountdownProps {
   updateInterval?: number
 }
 
+const FREQUENT_THRESHOLD = 10 * SECOND
+const FREQUENT = SECOND / 20
+const INFREQUENT = SECOND / 2
+
 function Countdown(props: CountdownProps) {
   const {
     targetDate: controlledTargetDate,
-    updateInterval = SECOND / 2,
+    updateInterval: controlledUpdateInterval,
   } = props
 
   const location = useLocation()
@@ -22,6 +26,15 @@ function Countdown(props: CountdownProps) {
   const [countdown, setCountdown] = useState(0)
 
   const isTargetDateControlled = controlledTargetDate !== undefined
+
+  const updateInterval = useMemo(() => {
+    return controlledUpdateInterval !== undefined ? controlledUpdateInterval :
+      countdown > FREQUENT_THRESHOLD ? INFREQUENT : FREQUENT
+  }, [controlledUpdateInterval, countdown])
+
+  const includeMilliseconds = useMemo(() => {
+    return updateInterval === FREQUENT
+  }, [updateInterval])
 
   useEffect(() => {
     if (!isTargetDateControlled) {
@@ -46,6 +59,7 @@ function Countdown(props: CountdownProps) {
         const millisecondsLeft = finishTime - Date.now()
         if (millisecondsLeft <= 0) {
           setFinished(true)
+          setCountdown(0)
         } else {
           setCountdown(millisecondsLeft)
         }
@@ -62,6 +76,7 @@ function Countdown(props: CountdownProps) {
     <CountdownView
       title={title}
       countdown={countdown}
+      includeMilliseconds={includeMilliseconds}
     />
   )
 }

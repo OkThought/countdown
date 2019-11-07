@@ -13,7 +13,7 @@ import {
 import {SECOND, MINUTE, HOUR, DAY} from '../../utils'
 import {GridListTileProps} from '@material-ui/core/GridListTile'
 
-const unitMinWidth = 70
+const unitMinWidth = 100
 const unitSpacing = 1
 
 //noinspection TypeScriptValidateTypes
@@ -73,8 +73,6 @@ export function CountdownView(props: CountdownViewProps) {
     useMediaQuery(theme.breakpoints.up(colSize * 5)),
   ]
   const maxCols = fitCols.lastIndexOf(true) + 1
-
-  // useEffect(() => console.log(countdown), [countdown])
   const milliseconds = useMemo(() => countdown % SECOND, [countdown])
   const seconds = useMemo(() => Math.floor(countdown % MINUTE / SECOND), [countdown])
   const minutes = useMemo(() => Math.floor(countdown % HOUR / MINUTE), [countdown])
