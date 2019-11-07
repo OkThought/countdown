@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ReactNode} from 'react'
 import {TextField, Button, makeStyles, Theme} from '@material-ui/core'
 import {OutlinedTextFieldProps} from '@material-ui/core/TextField'
 import {ButtonProps} from '@material-ui/core/Button'
@@ -7,7 +7,8 @@ export interface CountdownFormProps {
   titleProps: Partial<OutlinedTextFieldProps>
   dateProps: Partial<OutlinedTextFieldProps>
   timeProps: Partial<OutlinedTextFieldProps>
-  submitProps: ButtonProps
+  submit?:ReactNode
+  submitProps?: ButtonProps
 }
 
 //noinspection TypeScriptValidateTypes
@@ -45,7 +46,8 @@ function CountdownForm(props: CountdownFormProps) {
     titleProps,
     dateProps,
     timeProps,
-    submitProps,
+    submitProps = {},
+    submit,
   } = props
 
   const classes = useStyles(props)
@@ -94,14 +96,16 @@ function CountdownForm(props: CountdownFormProps) {
           }}
         />
       </div>
-      <Button
-        {...{
-          className: classes.submit,
-          ...submitProps,
-        }}
-      >
-        Start
-      </Button>
+      {submit || (
+        <Button
+          {...{
+            className: classes.submit,
+            ...submitProps,
+          }}
+        >
+          Start
+        </Button>
+      )}
     </div>
   )
 }

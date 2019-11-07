@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react'
 import {parseYMD, parseHMS, countdownPath} from '../../utils'
 import CountdownForm, {CountdownFormProps} from '../CountdownForm/CountdownForm'
-import {useLocation, useHistory} from 'react-router-dom'
+import {useLocation, useHistory, Link} from 'react-router-dom'
+import {Button} from '@material-ui/core'
 
 type omitKeys =
   | 'titleProps'
@@ -95,10 +96,16 @@ function CountdownCreate(props: CountdownCreateProps) {
           setSearchParam('time', value)
         },
       }}
-      submitProps={{
-        disabled: !newLocation,
-        href: newLocation,
-      }}
+      submit={newLocation === undefined ?
+        <Button disabled>Start</Button>
+        :
+        <Button
+          component={Link}
+          to={newLocation}
+        >
+          Start
+        </Button>
+      }
       {...restProps}
     />
   )
