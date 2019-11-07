@@ -44,20 +44,23 @@ export function parseHMS(value: string): [number, number, number] {
 }
 
 export type CountdownUrlParams = {
-  to: Date | number | string
+  to?: Date | number | string
+  from?: number
   title?: string
 }
 
 export function countdownPath(params: CountdownUrlParams) {
   const {
     to,
+    from,
     title,
   } = params
+
   const toDate = to ? to instanceof Date ? to : new Date(to) : undefined
-  const titleParam = title ? `title=${title}` : ''
   const entries = [
-    toDate ? `to=${toDate.toISOString()}` : '',
-    titleParam,
-  ].filter(Boolean)
-  return `/?${entries.join('&')}`
+    toDate ? ['to', toDate.toISOString()] : undefined,
+    from ? ['from', from.toString()] : undefined,
+    title ? ['title', title] : undefined,
+  ].filter((entry): entry is [string, string] => entry !== undefined)
+  return `/?${new URLSearchParams(entries)}`
 }
