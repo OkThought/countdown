@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {
   Typography,
   makeStyles,
@@ -55,7 +55,7 @@ export interface CountdownViewProps {
   includeMilliseconds?: boolean
 }
 
-type Unit = {key: string, title: string, value: number | string} & Partial<GridListTileProps>
+type Unit = {key: string, title: string, value: number} & Partial<GridListTileProps>
 export function CountdownView(props: CountdownViewProps) {
   const {
     countdown,
@@ -64,7 +64,7 @@ export function CountdownView(props: CountdownViewProps) {
   } = props
 
   const theme = useTheme()
-  const colSize = unitMinWidth + theme.spacing(unitSpacing)
+  const colSize = useMemo(() => unitMinWidth + theme.spacing(unitSpacing), [theme])
   const fitCols = [
     useMediaQuery(theme.breakpoints.up(colSize)),
     useMediaQuery(theme.breakpoints.up(colSize * 2)),
@@ -74,25 +74,35 @@ export function CountdownView(props: CountdownViewProps) {
   ]
   const maxCols = fitCols.lastIndexOf(true) + 1
 
+  // useEffect(() => console.log(countdown), [countdown])
+  const milliseconds = useMemo(() => countdown % SECOND, [countdown])
+  const seconds = useMemo(() => Math.floor(countdown % MINUTE / SECOND), [countdown])
+  const minutes = useMemo(() => Math.floor(countdown % HOUR / MINUTE), [countdown])
+  const hours = useMemo(() => Math.floor(countdown % DAY / HOUR), [countdown])
+  const days = useMemo(() => Math.floor(countdown / DAY), [countdown])
+  const units = useMemo(() => {
+    const units: Unit[] = [
+      {key: 'days', title: 'days', value: days},
+      {key: 'hours', title: 'hours', value: hours},
+      {key: 'minutes', title: 'minutes', value: minutes},
+      {key: 'seconds', title: 'seconds', value: seconds},
+    ]
+
+    if (includeMilliseconds) {
+      units.push({
+        key: 'milliseconds',
+        title: 'milliseconds',
+        value: milliseconds,
+        cols: maxCols === 5 ? 1 : maxCols === 3 ? 2 : maxCols
+      })
+    }
+
+    return units.slice(Math.min(units.findIndex(unit => unit.value !== 0), units.length - 1))
+  }, [days, hours, includeMilliseconds, maxCols, milliseconds, minutes, seconds])
+
+  const cols = useMemo(() => maxCols === 3 ? 2 : Math.min(maxCols, units.length), [maxCols, units.length])
+
   const classes = useStyles(props)
-  const milliseconds = countdown % SECOND
-  const seconds = Math.floor(countdown % MINUTE / SECOND)
-  const minutes = Math.floor(countdown % HOUR / MINUTE)
-  const hours = Math.floor(countdown % DAY / HOUR)
-  const days = Math.floor(countdown / DAY)
-
-  const units: Unit[] = [
-    {key: 'days', title: 'days', value: days},
-    {key: 'hours', title: 'hours', value: hours},
-    {key: 'minutes', title: 'minutes', value: minutes},
-    {key: 'seconds', title: 'seconds', value: seconds},
-  ]
-
-  if (includeMilliseconds) {
-    units.push({key: 'milliseconds', title: 'milliseconds', value: milliseconds, cols: maxCols === 5 ? 1 : maxCols === 3 ? 2 : maxCols})
-  }
-
-  const cols = maxCols === 3 ? 2 : Math.min(maxCols, units.length)
 
   return (
     <div className={classes.root}>
