@@ -3,6 +3,7 @@ import {Toolbar, Typography, AppBar, makeStyles, Theme, Button} from '@material-
 import {countdownPath, MINUTE} from '../../utils'
 import {AppBarProps} from '@material-ui/core/AppBar'
 import {Link} from 'react-router-dom'
+import routePatterns from '../../routePatterns'
 
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles((theme: Theme) => ({
@@ -29,7 +30,7 @@ function NavBar(props: NavBarProps) {
 
   const links = useMemo<NavItem[]>(() => [{
     label: 'New',
-    getUrl: () => '/new',
+    getUrl: () => routePatterns.newCountdown,
   }, {
     label: 'New Year',
     getUrl: () => countdownPath({

@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import CountdownCreate from '../CountdownCreate/CountdownCreate'
 import Countdown from '../Countdown/Countdown'
 import NavBar from '../NavBar/NavBar'
+import routePatterns from '../../routePatterns'
 
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles({
@@ -34,10 +35,10 @@ function App(props: {}) {
         <NavBar/>
         <div className={classes.content}>
           <Switch>
-            <Route path='/new' exact strict>
+            <Route path={routePatterns.newCountdown} exact strict>
               <CountdownCreate/>
             </Route>
-            <Route path='/' exact strict>
+            <Route path={routePatterns.countdown} exact strict>
               <Countdown/>
             </Route>
           </Switch>

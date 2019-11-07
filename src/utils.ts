@@ -1,3 +1,5 @@
+import routePatterns from './routePatterns'
+
 export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 
 export const SECOND = 1000
@@ -62,5 +64,5 @@ export function countdownPath(params: CountdownUrlParams) {
     from ? ['from', from.toString()] : undefined,
     title ? ['title', title] : undefined,
   ].filter((entry): entry is [string, string] => entry !== undefined)
-  return `/?${new URLSearchParams(entries)}`
+  return `${routePatterns.countdown}?${new URLSearchParams(entries)}`
 }
