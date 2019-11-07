@@ -21,8 +21,8 @@ function Countdown(props: CountdownProps) {
   const location = useLocation()
 
   const [title, setTitle] = useState('')
-  const [finishTitle, setFinishTitle] = useState<string | undefined>(undefined)
-  const [finishTime, setFinishTime] = useState(0)
+  const [onFinish, onFinishSet] = useState<undefined | (() => void)>(undefined)
+  const [finishTime, setFinishTime] = useState(-1)
   const [finished, setFinished] = useState(false)
   const [countdown, setCountdown] = useState(0)
 
@@ -38,6 +38,7 @@ function Countdown(props: CountdownProps) {
   }, [updateInterval])
 
   useEffect(() => {
+    setFinished(false)
     if (!isTargetDateControlled) {
       new URLSearchParams(location.search).forEach((value, key) => {
         if (key === 'to') {
@@ -50,21 +51,24 @@ function Countdown(props: CountdownProps) {
         } else if (key === 'title') {
           setTitle(value)
         } else if (key === 'finish_title') {
-          setFinishTitle(value)
+          onFinishSet(() => setTitle(value))
+        } else if (key === 'finish_redirect') {
+          onFinishSet(() => window.location.assign(value))
         }
       })
     }
   }, [isTargetDateControlled, location.search])
 
   useEffect(() => {
-    if (!finished) {
+    if (!finished && finishTime > 0) {
       const handle = setInterval(() => {
         const millisecondsLeft = finishTime - Date.now()
         if (millisecondsLeft <= 0) {
+          console.log('finished')
           setFinished(true)
           setCountdown(0)
-          if (finishTitle !== undefined) {
-            setTitle(finishTitle)
+          if (onFinish) {
+            onFinish()
           }
         } else {
           setCountdown(millisecondsLeft)
@@ -72,7 +76,7 @@ function Countdown(props: CountdownProps) {
       }, updateInterval)
       return () => clearInterval(handle)
     }
-  }, [setCountdown, updateInterval, finished, finishTime, finishTitle])
+  }, [setCountdown, updateInterval, finished, finishTime, onFinish])
 
   useEffect(() => {
     window.document.title = title || 'Countdown'
