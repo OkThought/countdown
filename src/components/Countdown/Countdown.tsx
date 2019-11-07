@@ -21,6 +21,7 @@ function Countdown(props: CountdownProps) {
   const location = useLocation()
 
   const [title, setTitle] = useState('')
+  const [finishTitle, setFinishTitle] = useState<string | undefined>(undefined)
   const [finishTime, setFinishTime] = useState(0)
   const [finished, setFinished] = useState(false)
   const [countdown, setCountdown] = useState(0)
@@ -48,6 +49,8 @@ function Countdown(props: CountdownProps) {
           }
         } else if (key === 'title') {
           setTitle(value)
+        } else if (key === 'finish_title') {
+          setFinishTitle(value)
         }
       })
     }
@@ -60,13 +63,16 @@ function Countdown(props: CountdownProps) {
         if (millisecondsLeft <= 0) {
           setFinished(true)
           setCountdown(0)
+          if (finishTitle !== undefined) {
+            setTitle(finishTitle)
+          }
         } else {
           setCountdown(millisecondsLeft)
         }
       }, updateInterval)
       return () => clearInterval(handle)
     }
-  }, [setCountdown, updateInterval, finished, finishTime])
+  }, [setCountdown, updateInterval, finished, finishTime, finishTitle])
 
   useEffect(() => {
     window.document.title = title || 'Countdown'
