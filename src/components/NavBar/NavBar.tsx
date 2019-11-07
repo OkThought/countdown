@@ -49,7 +49,7 @@ function NavBar(props: NavBarProps) {
   }, {
     label: '5 minutes',
     getUrl: () => countdownPath({
-      to: new Date(new Date().getTime() + 5 * MINUTE),
+      from: 5 * MINUTE,
       title: '5 minutes',
     }),
   }], [])
