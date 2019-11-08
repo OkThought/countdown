@@ -4,7 +4,6 @@ import {SECOND} from '../../utils'
 import {useLocation} from 'react-router-dom'
 
 export interface CountdownProps {
-  targetDate?: Date
   updateInterval?: number
 }
 
@@ -14,75 +13,77 @@ const INFREQUENT = SECOND / 2
 
 function Countdown(props: CountdownProps) {
   const {
-    targetDate: controlledTargetDate,
-    updateInterval: controlledUpdateInterval,
+    updateInterval: updateIntervalControlled,
   } = props
 
   const location = useLocation()
 
-  const [title, setTitle] = useState('')
-  const [onFinish, onFinishSet] = useState<undefined | (() => void)>(undefined)
-  const [finishTime, setFinishTime] = useState(-1)
-  const [finished, setFinished] = useState(false)
-  const [countdown, setCountdown] = useState(0)
-
-  const isTargetDateControlled = controlledTargetDate !== undefined
+  const [title, titleSet] = useState('')
+  const [finishHandlers, finishHandlersSet] = useState<Array<() => void>>([])
+  const [finishTime, finishTimeSet] = useState(-1)
+  const [finished, finishedSet] = useState(false)
+  const [countdown, countdownSet] = useState<number>(0)
 
   const updateInterval = useMemo(() => {
-    return controlledUpdateInterval !== undefined ? controlledUpdateInterval :
+    return updateIntervalControlled !== undefined ? updateIntervalControlled :
       countdown > FREQUENT_THRESHOLD ? INFREQUENT : FREQUENT
-  }, [controlledUpdateInterval, countdown])
+  }, [updateIntervalControlled, countdown])
 
-  const includeMilliseconds = useMemo(() => {
-    return updateInterval === FREQUENT
-  }, [updateInterval])
+  const includeMilliseconds = useMemo(() => updateInterval === FREQUENT, [updateInterval])
+  const started = useMemo(() => finishTime > 0, [finishTime])
 
   useEffect(() => {
-    setFinished(false)
-    if (!isTargetDateControlled) {
-      new URLSearchParams(location.search).forEach((value, key) => {
-        if (key === 'to') {
-          setFinishTime(new Date(value).getTime())
-        } else if (key === 'from') {
-          const milliseconds = parseInt(value, 10)
-          if (!isNaN(milliseconds)) {
-            setFinishTime(Date.now() + milliseconds)
-          }
-        } else if (key === 'title') {
-          setTitle(value)
-        } else if (key === 'finish_title') {
-          onFinishSet(() => setTitle(value))
-        } else if (key === 'finish_redirect') {
-          onFinishSet(() => window.location.assign(value))
+    let finishTimeNew = Date.now()
+    let titleNew = ''
+    const finishHandlersNew = [
+      () => finishedSet(true),
+      () => countdownSet(0),
+    ]
+    new URLSearchParams(location.search).forEach((value, key) => {
+      if (key === 'to') {
+        finishTimeNew = Date.parse(value)
+      } else if (key === 'from') {
+        const milliseconds = parseInt(value, 10)
+        if (!isNaN(milliseconds)) {
+          finishTimeNew = Date.now() + milliseconds
         }
-      })
-    }
-  }, [isTargetDateControlled, location.search])
+      } else if (key === 'title') {
+        titleNew = value
+      } else if (key === 'finish_title') {
+        finishHandlersNew.push(() => titleSet(value))
+      } else if (key === 'finish_redirect') {
+        finishHandlersNew.push(() => {
+          window.location.href = value
+        })
+      }
+    })
+    finishTimeSet(finishTimeNew)
+    titleSet(titleNew)
+    finishHandlersSet(finishHandlersNew)
+    finishedSet(false)
+  }, [location.search])
 
   useEffect(() => {
-    if (!finished && finishTime > 0) {
+    if (started && !finished) {
       const handle = setInterval(() => {
         const millisecondsLeft = finishTime - Date.now()
         if (millisecondsLeft <= 0) {
-          console.log('finished')
-          setFinished(true)
-          setCountdown(0)
-          if (onFinish) {
-            onFinish()
+          for (const handler of finishHandlers) {
+            handler()
           }
         } else {
-          setCountdown(millisecondsLeft)
+          countdownSet(millisecondsLeft)
         }
       }, updateInterval)
       return () => clearInterval(handle)
     }
-  }, [setCountdown, updateInterval, finished, finishTime, onFinish])
+  }, [countdownSet, updateInterval, finished, finishTime, finishHandlers, countdown, started])
 
   useEffect(() => {
     window.document.title = title || 'Countdown'
   }, [title])
 
-  return (
+  return (!started ? null :
     <CountdownView
       title={title}
       countdown={countdown}
