@@ -2,12 +2,19 @@ import React, {ReactNode} from 'react'
 import {TextField, Button, makeStyles, Theme} from '@material-ui/core'
 import {OutlinedTextFieldProps} from '@material-ui/core/TextField'
 import {ButtonProps} from '@material-ui/core/Button'
+import {
+  KeyboardDatePicker,
+  KeyboardDatePickerProps,
+  KeyboardTimePickerProps,
+  KeyboardTimePicker, MuiPickersUtilsProvider,
+} from '@material-ui/pickers'
+import DateFnsUtils from '@date-io/date-fns'
 
 export interface CountdownFormProps {
   titleProps: Partial<OutlinedTextFieldProps>
-  dateProps: Partial<OutlinedTextFieldProps>
-  timeProps: Partial<OutlinedTextFieldProps>
-  submit?:ReactNode
+  dateProps: KeyboardDatePickerProps
+  timeProps: KeyboardTimePickerProps
+  submit?: ReactNode
   submitProps?: ButtonProps
 }
 
@@ -63,38 +70,32 @@ function CountdownForm(props: CountdownFormProps) {
         }}
       />
       <div className={classes.datetimeContainer}>
-        <TextField
-          {...{
-            className: classes.date,
-            variant: 'outlined',
-            label: 'Date',
-            InputLabelProps: {
-              shrink: true,
-            },
-            InputProps: {
-              inputProps: {
-                type: 'date',
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            {...{
+              className: classes.date,
+              inputVariant: 'outlined',
+              variant: 'dialog',
+              label: 'Date',
+              InputLabelProps: {
+                shrink: true,
               },
-            },
-            ...dateProps,
-          }}
-        />
-        <TextField
-          {...{
-            className: classes.time,
-            variant: 'outlined',
-            label: 'Time',
-            InputLabelProps: {
-              shrink: true,
-            },
-            InputProps: {
-              inputProps: {
-                type: 'time',
+              ...dateProps,
+            }}
+          />
+          <KeyboardTimePicker
+            {...{
+              className: classes.time,
+              inputVariant: 'outlined',
+              variant: 'dialog',
+              label: 'Time',
+              InputLabelProps: {
+                shrink: true,
               },
-            },
-            ...timeProps,
-          }}
-        />
+              ...timeProps,
+            }}
+          />
+        </MuiPickersUtilsProvider>
       </div>
       {submit || (
         <Button

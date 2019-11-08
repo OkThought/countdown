@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react'
-import {parseYMD, parseHMS, countdownPath} from '../../utils'
+import {parseYMD, parseHMS, countdownPath, formatDate, formatTime} from '../../utils'
 import CountdownForm, {CountdownFormProps} from '../CountdownForm/CountdownForm'
 import {useLocation, useHistory, Link} from 'react-router-dom'
 import {Button} from '@material-ui/core'
@@ -20,7 +20,7 @@ function CountdownCreate(props: CountdownCreateProps) {
   const [title, setTitle] = useState('')
   const [dateInputString, setDateInputString] = useState('')
   const [timeInputString, setTimeInputString] = useState('')
-  const [datetime, setNewTargetDate] = useState<Date | undefined>(undefined)
+  const [datetime, setDatetime] = useState<Date | null>(null)
 
   const datetimeValue = datetime && datetime.getTime()
 
@@ -32,7 +32,7 @@ function CountdownCreate(props: CountdownCreateProps) {
   }, [history, location])
 
   const newLocation = useMemo(() => {
-    return datetimeValue === undefined ? undefined : countdownPath({to: datetimeValue, title})
+    return datetimeValue === null ? undefined : countdownPath({to: datetimeValue, title})
   }, [datetimeValue, title])
 
   useEffect(() => {
@@ -52,12 +52,12 @@ function CountdownCreate(props: CountdownCreateProps) {
   }, [location.search])
 
   useEffect(() => {
-    let newDatetime: Date | undefined = undefined
+    let newDatetime: Date | null = null
     if (dateInputString) {
       const [year, month, dayOfTheMonth] = parseYMD(dateInputString)
       newDatetime = new Date(year, month - 1, dayOfTheMonth)
     }
-    setNewTargetDate(newDatetime)
+    setDatetime(newDatetime)
   }, [dateInputString])
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function CountdownCreate(props: CountdownCreateProps) {
       } else {
         newDatetime.setHours(0)
       }
-      setNewTargetDate(newDatetime)
+      setDatetime(newDatetime)
     }
   }, [datetimeValue, timeInputString])
 
@@ -83,17 +83,19 @@ function CountdownCreate(props: CountdownCreateProps) {
         },
       }}
       dateProps={{
-        value: dateInputString,
-        onChange: ({target: {value}}) => {
-          setDateInputString(value)
-          setSearchParam('date', value)
+        value: datetime,
+        onChange: (date) => {
+          setDatetime(date)
+          setDateInputString(date ? formatDate(date) : '')
+          setSearchParam('date', date ? formatDate(date) : '')
         },
       }}
       timeProps={{
-        value: timeInputString,
-        onChange: ({target: {value}}) => {
-          setTimeInputString(value)
-          setSearchParam('time', value)
+        value: datetime,
+        onChange: (date) => {
+          setDatetime(date)
+          setTimeInputString(date ? formatTime(date) : '')
+          setSearchParam('time', date ? formatTime(date) : '')
         },
       }}
       submit={newLocation === undefined ?
