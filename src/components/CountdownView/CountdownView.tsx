@@ -94,8 +94,8 @@ export function CountdownView(props: CountdownViewProps) {
         cols: maxCols === 5 ? 1 : maxCols === 3 ? 2 : maxCols
       })
     }
-
-    return units.slice(Math.min(units.findIndex(unit => unit.value !== 0), units.length - 1))
+    const firstNonZeroIndex = units.findIndex(unit => unit.value !== 0)
+    return firstNonZeroIndex === -1 ? [] : units.slice(firstNonZeroIndex)
   }, [days, hours, includeMilliseconds, maxCols, milliseconds, minutes, seconds])
 
   const cols = useMemo(() => maxCols === 3 ? 2 : Math.min(maxCols, units.length), [maxCols, units.length])
