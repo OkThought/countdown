@@ -26,7 +26,7 @@ function App(props: {}) {
   const classes = useStyles(props)
 
   useEffect(() => {
-    window.document.title = 'Countdown'
+    document.title = 'Countdown'
   })
 
   return (

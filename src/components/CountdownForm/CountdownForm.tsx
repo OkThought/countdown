@@ -2,18 +2,13 @@ import React, {ReactNode} from 'react'
 import {TextField, Button, makeStyles, Theme} from '@material-ui/core'
 import {OutlinedTextFieldProps} from '@material-ui/core/TextField'
 import {ButtonProps} from '@material-ui/core/Button'
-import {
-  KeyboardDatePicker,
-  KeyboardDatePickerProps,
-  KeyboardTimePickerProps,
-  KeyboardTimePicker, MuiPickersUtilsProvider,
-} from '@material-ui/pickers'
+import {MuiPickersUtilsProvider, TimePicker, DatePicker, DatePickerProps, TimePickerProps} from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 
 export interface CountdownFormProps {
   titleProps: Partial<OutlinedTextFieldProps>
-  dateProps: KeyboardDatePickerProps
-  timeProps: KeyboardTimePickerProps
+  dateProps: DatePickerProps
+  timeProps: TimePickerProps
   submit?: ReactNode
   submitProps?: ButtonProps
 }
@@ -71,19 +66,20 @@ function CountdownForm(props: CountdownFormProps) {
       />
       <div className={classes.datetimeContainer}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
+          <DatePicker
             {...{
               className: classes.date,
               inputVariant: 'outlined',
               variant: 'dialog',
               label: 'Date',
+              format: 'yyyy MMMM do',
               InputLabelProps: {
                 shrink: true,
               },
               ...dateProps,
             }}
           />
-          <KeyboardTimePicker
+          <TimePicker
             {...{
               className: classes.time,
               inputVariant: 'outlined',

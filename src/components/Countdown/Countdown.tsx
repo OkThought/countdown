@@ -80,7 +80,7 @@ function Countdown(props: CountdownProps) {
   }, [countdownSet, updateInterval, finished, finishTime, finishHandlers, countdown, started])
 
   useEffect(() => {
-    window.document.title = title || 'Countdown'
+    document.title = title || 'Countdown'
   }, [title])
 
   return (!started ? null :

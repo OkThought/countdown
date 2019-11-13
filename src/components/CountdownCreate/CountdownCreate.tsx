@@ -1,14 +1,16 @@
-import React, {useState, useEffect, useCallback, useMemo} from 'react'
-import {parseYMD, parseHMS, countdownPath, formatDate, formatTime} from '../../utils'
+import React, {useState, useEffect, useCallback, useMemo, ChangeEvent} from 'react'
+import {countdownPath} from '../../utils'
 import CountdownForm, {CountdownFormProps} from '../CountdownForm/CountdownForm'
 import {useLocation, useHistory, Link} from 'react-router-dom'
 import {Button} from '@material-ui/core'
+import {MaterialUiPickersDate} from '@material-ui/pickers/typings/date'
 
 type omitKeys =
   | 'titleProps'
   | 'dateProps'
   | 'timeProps'
   | 'submitProps'
+
 export interface CountdownCreateProps extends Omit<CountdownFormProps, omitKeys> {
 
 }
@@ -18,85 +20,67 @@ function CountdownCreate(props: CountdownCreateProps) {
   const location = useLocation()
   const history = useHistory()
   const [title, setTitle] = useState('')
-  const [dateInputString, setDateInputString] = useState('')
-  const [timeInputString, setTimeInputString] = useState('')
-  const [datetime, setDatetime] = useState<Date | null>(null)
+  const [timestamp, setTimestamp] = useState<number>(NaN)
 
-  const datetimeValue = datetime && datetime.getTime()
+  const datetime = useMemo(() => isNaN(timestamp) ? null : new Date(timestamp), [timestamp])
+
+  const newLocation = useMemo(() => {
+    return datetime === null ? undefined : countdownPath({to: datetime, title})
+  }, [datetime, title])
 
   const setSearchParam = useCallback((key: string, value: string) => {
     const newSearch = new URLSearchParams(location.search)
-    newSearch.set(key, value)
+    if (value) {
+      newSearch.set(key, value)
+    } else {
+      newSearch.delete(key)
+    }
     history.location.search = newSearch.toString()
     history.replace(history.location)
   }, [history, location])
 
-  const newLocation = useMemo(() => {
-    return datetimeValue === null ? undefined : countdownPath({to: datetimeValue, title})
-  }, [datetimeValue, title])
+  const handleTitleChange = useCallback(({target: {value}}: ChangeEvent<HTMLInputElement>) => {
+    setTitle(value)
+    setSearchParam('title', value)
+  }, [setSearchParam])
+
+  const handleDatetimeAccept = useCallback((date: MaterialUiPickersDate | null) => {
+    const ts = date ? date.getTime() : NaN
+    setTimestamp(ts)
+    setSearchParam('tots', isNaN(ts) ? '' : ts.toString())
+  }, [setSearchParam])
 
   useEffect(() => {
-    window.document.title = title || 'New Countdown'
+    document.title = title || 'New Countdown'
   }, [title])
 
   useEffect(() => {
+    let ts = NaN
+    let title = ''
     new URLSearchParams(location.search).forEach((value, key) => {
-      if (key === 'date') {
-        setDateInputString(value)
-      } else if (key === 'time') {
-        setTimeInputString(value)
+      if (key === 'tots') {
+        ts = parseInt(value, 10) || ts
       } else if (key === 'title') {
-        setTitle(value)
+        title = value
       }
     })
+    setTitle(title)
+    setTimestamp(ts)
   }, [location.search])
-
-  useEffect(() => {
-    let newDatetime: Date | null = null
-    if (dateInputString) {
-      const [year, month, dayOfTheMonth] = parseYMD(dateInputString)
-      newDatetime = new Date(year, month - 1, dayOfTheMonth)
-    }
-    setDatetime(newDatetime)
-  }, [dateInputString])
-
-  useEffect(() => {
-    if (datetimeValue) {
-      const newDatetime = new Date(datetimeValue)
-      if (timeInputString) {
-        const [hours, minutes, seconds = 0] = parseHMS(timeInputString)
-        newDatetime.setHours(hours, minutes, seconds)
-      } else {
-        newDatetime.setHours(0)
-      }
-      setDatetime(newDatetime)
-    }
-  }, [datetimeValue, timeInputString])
 
   return (
     <CountdownForm
       titleProps={{
         value: title,
-        onChange: ({target: {value}}) => {
-          setTitle(value)
-          setSearchParam('title', value)
-        },
+        onChange: handleTitleChange,
       }}
       dateProps={{
         value: datetime,
-        onChange: (date) => {
-          setDatetime(date)
-          setDateInputString(date ? formatDate(date) : '')
-          setSearchParam('date', date ? formatDate(date) : '')
-        },
+        onChange: handleDatetimeAccept,
       }}
       timeProps={{
         value: datetime,
-        onChange: (date) => {
-          setDatetime(date)
-          setTimeInputString(date ? formatTime(date) : '')
-          setSearchParam('time', date ? formatTime(date) : '')
-        },
+        onChange: handleDatetimeAccept,
       }}
       submit={newLocation === undefined ?
         <Button disabled>Start</Button>
