@@ -101,7 +101,7 @@ function NavBar(props: NavBarProps) {
       <Divider/>
       <List>
         {items.map(({label, key = label, icon, getUrl}) =>
-          <ListItem button key={key} component={Link} to={getUrl}>
+          <ListItem button key={key} component={Link} to={getUrl} onClick={() => drawerOpenSet(false)}>
             <ListItemIcon>
               {icon}
             </ListItemIcon>
