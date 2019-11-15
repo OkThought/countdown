@@ -1,29 +1,16 @@
-import React, {useMemo, Key, useState} from 'react'
-import {
-  Toolbar,
-  AppBar,
-  makeStyles,
-  Theme,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Hidden,
-  Drawer,
-  Typography,
-} from '@material-ui/core'
-import {Add as AddIcon, Menu as MenuIcon} from '@material-ui/icons'
+import React, {useMemo, Key, HTMLProps} from 'react'
+import {makeStyles, Theme, Divider, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core'
+import {Add as AddIcon} from '@material-ui/icons'
 import {countdownPath, MINUTE} from '../../utils'
-import {AppBarProps} from '@material-ui/core/AppBar'
-import {Link} from 'react-router-dom'
+import {Link, LinkProps} from 'react-router-dom'
 import routePatterns from '../../routePatterns'
 import {ListItemIconProps} from '@material-ui/core/ListItemIcon'
 
 //noinspection TypeScriptValidateTypes
 const useStyles = makeStyles((theme: Theme) => ({
-  appBar: {},
+  root: {
+    display: 'flex',
+  },
   toolbar: {
     ...theme.mixins.toolbar,
     display: 'flex',
@@ -43,20 +30,15 @@ type NavItem = {
   getUrl: () => string
 }
 
-export interface NavBarProps extends AppBarProps {
-
+export interface AppNavProps extends HTMLProps<HTMLDivElement> {
+  LinkProps?: Partial<LinkProps>
 }
 
-function NavBar(props: NavBarProps) {
+function AppNav(props: AppNavProps) {
   const {
+    LinkProps: linkProps = {},
     ...restProps
   } = props
-
-  const [drawerOpen, drawerOpenSet] = useState(false)
-
-  const handleDrawerToggle = () => {
-    drawerOpenSet(!drawerOpen)
-  }
 
   const items = useMemo<NavItem[]>(() => [{
     label: 'New',
@@ -91,17 +73,13 @@ function NavBar(props: NavBarProps) {
 
   const classes = useStyles(props)
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar}>
-        <Typography variant='h6'>
-          Countdown
-        </Typography>
-      </div>
+  return (
+    <div className={classes.root} {...restProps}>
+      <div className={classes.toolbar}/>
       <Divider/>
       <List>
         {items.map(({label, key = label, icon, getUrl}) =>
-          <ListItem button key={key} component={Link} to={getUrl} onClick={() => drawerOpenSet(false)}>
+          <ListItem button key={key} component={Link} to={getUrl} {...linkProps}>
             <ListItemIcon>
               {icon}
             </ListItemIcon>
@@ -113,44 +91,10 @@ function NavBar(props: NavBarProps) {
       </List>
     </div>
   )
-
-  return (
-    <>
-      <AppBar className={classes.appBar} {...restProps}>
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            edge='start'
-            onClick={handleDrawerToggle}
-          >
-            <MenuIcon/>
-          </IconButton>
-        </Toolbar>
-        <nav>
-          <Hidden smUp implementation='css'>
-            <Drawer
-              open={drawerOpen}
-              variant='temporary'
-              anchor='left'
-              onClose={handleDrawerToggle}
-              ModalProps={{keepMounted: true}}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation='css'>
-            <Drawer open variant='permanent'>
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-      </AppBar>
-    </>
-  )
 }
 
-NavBar.defaultProps = {
+AppNav.defaultProps = {
   position: 'sticky',
-} as Partial<NavBarProps>
+} as Partial<AppNavProps>
 
-export default NavBar
+export default AppNav
